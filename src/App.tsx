@@ -1,11 +1,9 @@
-import { Box } from '@mui/material'
+import HomePage from '@components/pages/Home'
 
 function App() 
 {
 	return (
-		<Box>
-			Hello World!
-		</Box>
+		<HomePage />
 	)
 }
 

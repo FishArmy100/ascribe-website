@@ -280,17 +280,19 @@ export function build_theme(theme: AppTheme, ui_scale: number, font: SelectedFon
                         },
                     },
                     {
-                        props: { variant: 'contained', color: 'secondary' },
+                        props: { variant: 'contained', color: 'primary' },
                         style: {
-                            background: `linear-gradient(
+                            backgroundColor: colors.primary.main,
+                            backgroundImage: `linear-gradient(
                                 180deg,
-                                ${colors.secondary.main} 0%,
-                                ${colors.secondary.dark} 100%
+                                ${colors.primary.main} 0%,
+                                ${colors.primary.dark} 100%
                             )`,
-                            color: colors.secondary.contrast_text,
+                            color: colors.primary.contrast_text,
 
                             '&:hover': {
-                                background: colors.secondary.dark,
+                                backgroundColor: colors.primary.dark,
+                                backgroundImage: 'none',
                             },
                         },
                     },

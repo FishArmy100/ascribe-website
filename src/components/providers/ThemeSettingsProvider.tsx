@@ -25,7 +25,7 @@ export default function ThemeSettingsProvider({
 }: ThemeSettingsProviderProps): React.ReactElement
 {
     const [selected_theme, set_selected_theme] = useState<AppThemeType>("light");
-    const [scale, set_scale] = useState(0.0);
+    const [scale, set_scale] = useState(1.0);
     const [font, set_font] = useState<SelectedFont>("arial");
 
     const theme_settings = useMemo((): ThemeSettingsContextType => ({
