@@ -9,3 +9,6 @@ translate:
         -l {{LANGUAGES}}                                    \
         -b azure                                            \
         --azureKey $AZURE_KEY
+
+build-website:
+    npx tsc -b && npx vite build --outDir ./docs --emptyOutDir

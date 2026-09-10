@@ -1,7 +1,5 @@
 import use_screenshot_images from "@assets/screenshots";
-import { use_theme_settings } from "@components/providers/ThemeSettingsProvider";
 import {
-    AppBar,
     Box,
     Button,
     Card,
@@ -11,28 +9,14 @@ import {
     DialogContent,
     Grid,
     IconButton,
-    Toolbar,
     Typography,
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import type React from "react";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import PageBar from "@components/PageBar";
-
-const features = [
-    {
-        title: "Simple",
-        description: "A clean and intuitive experience designed to get users started quickly.",
-    },
-    {
-        title: "Powerful",
-        description: "Everything users need to get the most out of your application.",
-    },
-    {
-        title: "Flexible",
-        description: "Built to fit different workflows and adapt to your needs.",
-    },
-];
+import __t, { useI18n } from "@fisharmy100/react-auto-i18n";
+import * as meta from "@src/meta";
 
 export default function HomePage(): React.ReactElement
 {
@@ -42,6 +26,18 @@ export default function HomePage(): React.ReactElement
         src: string;
         alt: string;
     } | null>(null);
+
+    const i18n = useI18n();
+    const strings = useMemo(() => ({
+        title: __t("home.title", "{{Ascribe}}, a simple to use Bible study application"),
+        desc: __t("home.desc", "{{Ascribe}} is a open source, local, flexible, and feature rich Bible study application for everyone, regardless of technical skill"),
+        get_started: __t("home.get_started", "Get Started"),
+        features: __t("home.features", "Features of {{Ascribe}}"),
+        images_header: __t("home.images_header", "See it in Action!"),
+        footer: __t("home.footer", "{{© 2026 Ascribe.}} All rights reserved."),
+    }), [i18n]);
+
+    const features = use_app_features();
 
     return (
         <Box
@@ -79,7 +75,7 @@ export default function HomePage(): React.ReactElement
                             },
                         }}
                     >
-                        Your application, made simple.
+                        {strings.title}
                     </Typography>
 
                     <Typography
@@ -93,15 +89,15 @@ export default function HomePage(): React.ReactElement
                             lineHeight: 1.6,
                         }}
                     >
-                        A short description of your application goes here.
-                        Explain what it does and why people should use it.
+                        {strings.desc}
                     </Typography>
 
                     <Button
                         variant="contained"
                         size="large"
+                        onClick={() => meta.goto_ascribe_store_page()}
                     >
-                        Get Started
+                        {strings.get_started}
                     </Button>
                 </Container>
             </Box>
@@ -122,7 +118,7 @@ export default function HomePage(): React.ReactElement
                         mb: 6,
                     }}
                 >
-                    Everything you need
+                    {strings.features}
                 </Typography>
 
                 <Grid container spacing={4}>
@@ -163,7 +159,7 @@ export default function HomePage(): React.ReactElement
                                             lineHeight: 1.7,
                                         }}
                                     >
-                                        {feature.description}
+                                        {feature.desc}
                                     </Typography>
                                 </CardContent>
                             </Card>
@@ -188,7 +184,7 @@ export default function HomePage(): React.ReactElement
                         mb: 5,
                     }}
                 >
-                    See it in action
+                    {strings.images_header}
                 </Typography>
 
                 <Grid container spacing={3}>
@@ -331,4 +327,24 @@ export default function HomePage(): React.ReactElement
             </Box>
         </Box>
     );
+}
+
+
+function use_app_features(): { title: string, desc: string }[]
+{
+    const i18n = useI18n();
+    return useMemo((): { title: string, desc: string }[] => [
+        {
+        title: __t("home.features.0.title", "Simple"),
+        desc: __t("home.features.0.desc", "A clean and intuitive experience designed to get you started quickly."),
+        },
+        {
+            title: __t("home.features.1.title", "Powerful"),
+            desc: __t("home.features.1.desc", "Most things Bible students need to study God's word."),
+        },
+        {
+            title: __t("home.features.2.title", "Free"),
+            desc: __t("home.features.2.desc", "Completely free and open source! No strings attached."),
+        },
+    ], [i18n]);
 }
