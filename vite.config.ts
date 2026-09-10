@@ -9,5 +9,5 @@ export default defineConfig({
     react(),
     tsconfigPaths(),
   ],
-  base: "/ascribe-website/"
+  base: "/ascribe-website/" 
 })
