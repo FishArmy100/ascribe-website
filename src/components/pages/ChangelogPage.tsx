@@ -13,6 +13,7 @@ import BuildIcon from "@mui/icons-material/Build";
 import DeleteIcon from "@mui/icons-material/Delete";
 import PageBar from "@components/PageBar";
 import __t, { useI18n } from "@fisharmy100/react-auto-i18n";
+import Footer from "@components/Footer";
 
 type UpdateType = "Added" | "Changed" | "Fixed" | "Removed";
 
@@ -49,7 +50,7 @@ function use_changelog(): ChangelogEntry[]
                 },
                 {
                     type: "Fixed",
-                    text: __t("l0-4", "Bible printer did not render verse punctuation"),
+                    text: __t("l0-4", "Bible printer now renders verse punctuation"),
                 },
                 {
                     type: "Fixed",
@@ -79,6 +80,10 @@ function use_changelog(): ChangelogEntry[]
                     type: "Added",
                     text: __t("l0-11", "Alternate search syntax added for searching {{(&, |)}}"),
                 },
+                {
+                    type: "Fixed",
+                    text: __t("l0-12", "Voice dropdown now properly lets users select between voices in the audio player.")
+                }
             ]
         }
     ], [i18n])
@@ -265,6 +270,11 @@ function ChangelogRelease({
 export default function ChangelogPage(): React.ReactElement 
 {
     const changelog = use_changelog();
+    const i18n = useI18n();
+    const strings = useMemo(() => ({
+        title: __t("changelog.title", "Changelog"),
+        desc: __t("changelog.desc", "Stay up to date with the latest features, improvements, fixes, and changes.")
+    }), [i18n])
 
     return (
         <Box
@@ -301,7 +311,7 @@ export default function ChangelogPage(): React.ReactElement
                             },
                         }}
                     >
-                        Changelog
+                        {strings.title}
                     </Typography>
 
                     <Typography
@@ -314,8 +324,7 @@ export default function ChangelogPage(): React.ReactElement
                             lineHeight: 1.6,
                         }}
                     >
-                        Stay up to date with the latest features,
-                        improvements, fixes, and changes.
+                        {strings.desc}
                     </Typography>
                 </Container>
             </Box>
@@ -348,17 +357,7 @@ export default function ChangelogPage(): React.ReactElement
                     borderColor: "divider",
                 }}
             >
-                <Container>
-                    <Typography
-                        variant="body2"
-                        color="text.secondary"
-                        sx={{
-                            textAlign: "center",
-                        }}
-                    >
-                        © 2026 Ascribe. All rights reserved.
-                    </Typography>
-                </Container>
+                <Footer />
             </Box>
         </Box>
     );

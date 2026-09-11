@@ -17,6 +17,7 @@ import { useMemo, useState } from "react";
 import PageBar from "@components/PageBar";
 import __t, { useI18n } from "@fisharmy100/react-auto-i18n";
 import * as meta from "@src/meta";
+import Footer from "@components/Footer";
 
 export default function HomePage(): React.ReactElement
 {
@@ -313,17 +314,7 @@ export default function HomePage(): React.ReactElement
                     borderColor: "divider",
                 }}
             >
-                <Container>
-                    <Typography
-                        variant="body2"
-                        color="text.secondary"
-                        sx={{
-                            textAlign: "center",
-                        }}
-                    >
-                        © 2026 Ascribe. All rights reserved.
-                    </Typography>
-                </Container>
+                <Footer />
             </Box>
         </Box>
     );
